@@ -6,6 +6,7 @@ export type TMovieState = {
 export type TMovie = {
   id: number;
   title: string;
+  overview: string;
   releaseDate: string;
   imageURL: string;
 };

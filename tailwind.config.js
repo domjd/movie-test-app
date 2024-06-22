@@ -1,12 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui"
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       gridTemplateColumns: {
-        'moviegrid': 'repeat(auto-fill, minmax(300px, 1fr))',
+        'moviegrid': 'repeat(auto-fill, minmax(380px, 1fr))',
       },
     },
   },
-  plugins: [],
+  plugins: [daisyui],
+  daisyui: {
+    themes: ["light", "night"],
+  },
 };
