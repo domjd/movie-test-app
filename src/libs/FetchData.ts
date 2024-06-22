@@ -2,14 +2,17 @@ import { TMovie, TMovieResponseData } from "../types/types";
 
 export async function fetchMovies(): Promise<TMovie[]> {
   try {
-    const data = await fetch("https://api.themoviedb.org/3/discover/movie", {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDQ4ZGM1YzEyMTQ3MTBiZDBmNTRjMTAyMjk5OGQ2ZSIsIm5iZiI6MTcxOTA3MDM2Mi4wODgxMTIsInN1YiI6IjYzZGQzZTdjMzczYWMyMDBjYWZjYjJiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gkdvV-7VvFP6g93x23Fx0DX8cKWkTgh-r43Drn3_xjM",
-      },
-    });
+    const data = await fetch(
+      "https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc",
+      {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMDQ4ZGM1YzEyMTQ3MTBiZDBmNTRjMTAyMjk5OGQ2ZSIsIm5iZiI6MTcxOTA3MDM2Mi4wODgxMTIsInN1YiI6IjYzZGQzZTdjMzczYWMyMDBjYWZjYjJiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gkdvV-7VvFP6g93x23Fx0DX8cKWkTgh-r43Drn3_xjM",
+        },
+      }
+    );
 
     const results = await data.json();
 
