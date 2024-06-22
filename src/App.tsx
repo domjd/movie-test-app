@@ -39,7 +39,7 @@ function App() {
           </svg>
           <input
             type="checkbox"
-            value="light"
+            value="winter"
             className="toggle theme-controller"
           />
           <svg
