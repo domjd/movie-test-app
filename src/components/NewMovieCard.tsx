@@ -6,7 +6,7 @@ type TNewMovieCardProps = {
 
 function NewMovieCard({ movie }: TNewMovieCardProps) {
   return (
-    <div className="card m-2 border-2 border-slate-800 bg-base-100 shadow-xl">
+    <div className="card m-2 border border-slate-800 bg-base-100 shadow-xl">
       <figure>
         <img src={movie.imageURL} alt="Shoes" />
       </figure>

@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       gridTemplateColumns: {
-        'moviegrid': 'repeat(auto-fill, minmax(380px, 1fr))',
+        'moviegrid': 'repeat(auto-fill, minmax(300px, 1fr))',
       },
     },
   },

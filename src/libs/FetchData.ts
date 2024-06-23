@@ -1,9 +1,9 @@
 import { TMovie, TMovieResponseData } from "../types/types";
 
-export async function fetchMovies(): Promise<TMovie[]> {
+export async function fetchMovies(page: number): Promise<TMovie[]> {
   try {
     const data = await fetch(
-      "https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc",
+      `https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc&page=${page}`,
       {
         method: "GET",
         headers: {
@@ -19,6 +19,8 @@ export async function fetchMovies(): Promise<TMovie[]> {
     const formattedMovies = results.results.map((m: TMovieResponseData) =>
       formatMovie(m)
     );
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     return formattedMovies;
   } catch (error) {

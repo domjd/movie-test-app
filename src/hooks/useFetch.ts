@@ -1,5 +1,5 @@
-import { useReducer } from "react";
-import { intialState, movieReducer } from "../reducers/MovieReducer";
+import { useEffect, useReducer } from "react";
+import { movieReducer, intialState } from "../reducers/MovieReducer";
 import { TMovie } from "../types/types";
 
 const useFetch = (data: TMovie[]) => {
@@ -7,6 +7,11 @@ const useFetch = (data: TMovie[]) => {
     ...intialState,
     movies: data,
   });
+
+  console.log(state.isLoading);
+  useEffect(() => {
+    if (data.length > 0) dispatch({ type: "SET_MOVIES", payload: data });
+  }, [data]);
 
   return {
     state,

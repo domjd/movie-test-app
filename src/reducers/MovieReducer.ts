@@ -2,7 +2,7 @@ import { TMovie, TMovieState } from "../types/types";
 
 export const intialState: TMovieState = {
   movies: [],
-  isLoading: false,
+  isLoading: true,
 };
 
 type Action =
@@ -14,7 +14,7 @@ export const movieReducer = (state: TMovieState, action: Action) => {
     case "SET_LOADING":
       return { ...state, isLoading: action.payload };
     case "SET_MOVIES":
-      return { ...state, movies: action.payload };
+      return { ...state, movies: action.payload, isLoading: false };
     default:
       return state;
   }
