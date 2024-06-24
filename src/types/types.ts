@@ -1,5 +1,6 @@
 export type TMovieState = {
   movies: TMovie[];
+  genre: string;
   isLoading: boolean;
 };
 

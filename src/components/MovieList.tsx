@@ -1,15 +1,15 @@
 import { TMovie } from "../types/types";
-import NewMovieCard from "./NewMovieCard";
-import useFetch from "../hooks/useFetch";
 import LoadMore from "./LoadMore";
+import NewMovieCard from "./NewMovieCard";
 
 type TMovieListProps = {
   moviesList: TMovie[];
+  genre: string;
 };
 
-function MovieList({ moviesList }: TMovieListProps) {
-  const { state } = useFetch(moviesList);
-  const { movies } = state;
+function MovieList({ moviesList, genre }: TMovieListProps) {
+  // const { state } = useFetch(moviesList);
+  // const { movies } = state;
 
   //   if (isLoading) {
   //     return (
@@ -29,10 +29,10 @@ function MovieList({ moviesList }: TMovieListProps) {
         <span className="loading loading-spinner loading-lg"></span>
       </div> */}
       <div className={`grid grid-cols-moviegrid transition-opacity}`}>
-        {movies?.map((movie: TMovie, index: number) => (
+        {moviesList?.map((movie: TMovie, index: number) => (
           <NewMovieCard key={index} movie={movie} />
         ))}
-        <LoadMore />
+        <LoadMore genre={genre} />
       </div>
       <div className="flex justify-center align-center m-8">
         <span className="loading loading-spinner loading-lg"></span>

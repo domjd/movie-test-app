@@ -2,10 +2,11 @@ import { useEffect, useReducer } from "react";
 import { movieReducer, intialState } from "../reducers/MovieReducer";
 import { TMovie } from "../types/types";
 
-const useFetch = (data: TMovie[]) => {
+const useFetch = (data: TMovie[], genre: string) => {
   const [state, dispatch] = useReducer(movieReducer, {
     ...intialState,
     movies: data,
+    genre,
   });
 
   console.log(state.isLoading);

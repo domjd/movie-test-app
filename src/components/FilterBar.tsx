@@ -1,17 +1,12 @@
 type TFilterBarProps = {
-  handleGenre: (n: number) => void;
+  handleGenreChange: (n: string) => void;
 };
 
-function FilterBar({ handleGenre }: TFilterBarProps) {
-  const handleChange = (genre: string) => {
-    const genreId = Number(genre);
-    handleGenre(genreId);
-  };
-
+function FilterBar({ handleGenreChange }: TFilterBarProps) {
   return (
     <select
-      onChange={(e) => handleChange(e.target.value)}
-      className="select select-bordered w-full max-w-xs"
+      onChange={(e) => handleGenreChange(e.target.value)}
+      className="select select-bordered mx-2 w-full max-w-xs"
     >
       <option disabled selected>
         Genre

@@ -4,15 +4,19 @@ import { fetchMovies } from "../libs/FetchData";
 import { TMovie } from "../types/types";
 import NewMovieCard from "./NewMovieCard";
 
+type TLoadMoreProps = {
+  genre: string;
+};
+
 let page = 2;
 
-function LoadMore() {
+function LoadMore({ genre }: TLoadMoreProps) {
   const { ref, inView } = useInView();
   const [data, setData] = useState<TMovie[]>([]);
 
   useEffect(() => {
     const fetchNewMovies = async () => {
-      const movies = await fetchMovies(page);
+      const movies = await fetchMovies(page, genre);
       setData([...data, ...movies]);
       page++;
     };
@@ -20,7 +24,7 @@ function LoadMore() {
     if (inView) {
       fetchNewMovies();
     }
-  }, [inView, data]);
+  }, [inView, data, genre]);
 
   return (
     <>
