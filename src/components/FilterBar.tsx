@@ -1,16 +1,14 @@
-type TFilterBarProps = {
-  handleGenreChange: (n: string) => void;
-};
+import useMoviesContext from "../hooks/useMoviesContext";
 
-function FilterBar({ handleGenreChange }: TFilterBarProps) {
+function FilterBar() {
+  const { handleGenreChange } = useMoviesContext();
+
   return (
     <select
       onChange={(e) => handleGenreChange(e.target.value)}
       className="select select-bordered mx-2 w-full max-w-xs"
+      defaultValue="0"
     >
-      <option disabled selected>
-        Genre
-      </option>
       <option value="0">Popular</option>
       <option value="28">Action</option>
       <option value="27">Horror</option>

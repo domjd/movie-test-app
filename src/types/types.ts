@@ -1,6 +1,7 @@
 export type TMovieState = {
   movies: TMovie[];
   genre: string;
+  page: number;
   isLoading: boolean;
 };
 

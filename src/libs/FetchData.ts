@@ -7,13 +7,15 @@ export async function fetchMovies(
   const endpoint =
     genre !== "0"
       ? `https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc&with_genres=${genre}&page=${page}`
-      : `https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc&&page=${page}`;
+      : `https://api.themoviedb.org/3/discover/movie?&sort_by=popularity.desc&page=${page}`;
+
+  console.log(endpoint);
   try {
     const data = await fetch(endpoint, {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: import.meta.env.TMDB_API_KEY,
+        Authorization: "Bearer " + import.meta.env.VITE_TMDB_API_KEY,
       },
     });
 

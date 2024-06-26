@@ -1,37 +1,31 @@
 import { useInView } from "react-intersection-observer";
-import React, { useEffect, useState } from "react";
-import { fetchMovies } from "../libs/FetchData";
-import { TMovie } from "../types/types";
-import NewMovieCard from "./NewMovieCard";
-
-type TLoadMoreProps = {
-  genre: string;
-};
-
-let page = 2;
-
-function LoadMore({ genre }: TLoadMoreProps) {
+import { useEffect } from "react";
+function LoadMore() {
   const { ref, inView } = useInView();
-  const [data, setData] = useState<TMovie[]>([]);
+
+  // useEffect(() => {
+  //   console.log("LoadMore");
+  //   if (inView) {
+  //     console.log("Load In View");
+  //     dispatch({ type: "SET_PAGE", payload: state.page + 1 });
+  //     //getMovies();
+  //     //loadNextPage();
+  //     //fetchMovies();
+  //   }
+  // }, [inView]);
 
   useEffect(() => {
-    const fetchNewMovies = async () => {
-      const movies = await fetchMovies(page, genre);
-      setData([...data, ...movies]);
-      page++;
-    };
-
-    if (inView) {
-      fetchNewMovies();
-    }
-  }, [inView, data, genre]);
+    if (inView) console.log("IN VIEW");
+  });
 
   return (
     <>
-      {data?.map((movie: TMovie, index: number) => (
+      {/* {movies?.map((movie: TMovie, index: number) => (
         <NewMovieCard key={index} movie={movie} />
-      ))}
-      <span ref={ref}></span>
+      ))} */}
+      <div className="flex justify-center align-center m-8">
+        <span ref={ref} className="loading loading-spinner loading-lg"></span>
+      </div>
     </>
   );
 }

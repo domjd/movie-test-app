@@ -1,37 +1,30 @@
-import { useEffect } from "react";
 import "./App.css";
-import { fetchMovies } from "./libs/FetchData";
 
 import MovieList from "./components/MovieList";
 import NavBar from "./components/NavBar";
 import FilterBar from "./components/FilterBar";
-import useFetch from "./hooks/useFetch";
+import useMoviesContext from "./hooks/useMoviesContext";
+
+import LoadMore from "./components/LoadMore";
+import { InView } from "react-intersection-observer";
 
 function App() {
-  // const [movieList, setMovieList] = useState<TMovie[]>([]);
-  // const [genre, setGenre] = useState(0);
-  const { state, dispatch } = useFetch([], "0");
-  const { movies, genre } = state;
+  const { handlePageChange } = useMoviesContext();
 
-  const handleGenreChange = (g: string) => {
-    if (g) dispatch({ type: "SET_GENRE", payload: g });
+  const loadPage = (inView: boolean) => {
+    console.log(inView);
+    if (inView) handlePageChange();
   };
-
-  useEffect(() => {
-    const getMovies = async () => {
-      dispatch({ type: "SET_LOADING", payload: true });
-      const data = await fetchMovies(1, genre);
-      dispatch({ type: "SET_MOVIES", payload: data });
-    };
-    getMovies();
-  }, [genre, dispatch]);
 
   return (
     <>
       <NavBar />
       <main className=" flex flex-col max-w-[1280px] m-auto justify-center">
-        <FilterBar handleGenreChange={handleGenreChange} />
-        <MovieList moviesList={movies} genre={genre} />
+        <FilterBar />
+        <MovieList />
+        <InView onChange={(inView) => loadPage(inView)}>
+          <LoadMore />
+        </InView>
       </main>
     </>
   );
