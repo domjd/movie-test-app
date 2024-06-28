@@ -18,7 +18,6 @@ export const movieReducer = (state: TMovieState, action: Action) => {
     case "SET_LOADING":
       return { ...state, isLoading: action.payload };
     case "SET_MOVIES":
-      console.log("setting movies: ", [...state.movies, ...action.payload]);
       return {
         ...state,
         movies: [...state.movies, ...action.payload],

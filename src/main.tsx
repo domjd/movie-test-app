@@ -5,7 +5,9 @@ import "./index.css";
 import MoviesContextProvider from "./contexts/MoviesContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <MoviesContextProvider>
-    <App />
-  </MoviesContextProvider>
+  <React.StrictMode>
+    <MoviesContextProvider>
+      <App />
+    </MoviesContextProvider>
+  </React.StrictMode>
 );

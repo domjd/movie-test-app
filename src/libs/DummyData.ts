@@ -1,3 +1,5 @@
+import { TMovie } from "../types/types";
+
 const dummyData = [
   {
     id: 1022789,
@@ -183,7 +185,7 @@ const dummyData = [
 
 export const fetchDummyData = async (page: number, genre: string) => {
   // Simulating an API call
-  const response = await new Promise((resolve) =>
+  const response = await new Promise<TMovie[]>((resolve) =>
     setTimeout(() => resolve(dummyData), 2000)
   );
 
