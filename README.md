@@ -1,4 +1,4 @@
-![movie app screenshot](movieapp.png)
+![movie app screenshot](movie_app.png)
 
 # Movie Test App For useReducer/Context API/Custom Hooks
 
