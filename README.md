@@ -1,3 +1,5 @@
+![movie app screenshot](movieapp.png)
+
 # Movie Test App For useReducer/Context API/Custom Hooks
 
 This is a small app I made to learn about useReducer and also practice working with the context API and custom hooks. I had used Redux before but not the built in useReducer so when I saw a video about a developer using it for a interview project I thought I would give it a try.

@@ -1,7 +1,7 @@
 function NavBar() {
   return (
     <div className="navbar bg-base-100">
-      <a className="btn btn-ghost text-xl">Dom's Movie App</a>
+      <a className="btn btn-ghost text-xl">React Movie App</a>
       <label className="flex cursor-pointer gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
