@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { movieReducer, intialState } from "../reducers/MovieReducer";
 import { fetchMovies } from "../libs/FetchData";
-import { fetchDummyData } from "../libs/DummyData";
+import toast from "react-hot-toast";
 
 const useFetch = () => {
   const [state, dispatch] = useReducer(movieReducer, intialState);
@@ -26,10 +26,12 @@ const useFetch = () => {
       dispatch({ type: "SET_LOADING", payload: true });
 
       try {
-        const response = await fetchDummyData(state.page, state.genre);
+        const response = await fetchMovies(state.page, state.genre);
         dispatch({ type: "SET_MOVIES", payload: response });
-      } catch (e) {
-        throw new Error("Intial Data could not be retrieved");
+      } catch (error: unknown) {
+        dispatch({ type: "SET_ERROR", payload: true });
+        if (error instanceof Error) toast.error(error.message);
+        else toast.error("Unknown Error Occured");
       } finally {
         dispatch({ type: "SET_LOADING", payload: false });
       }

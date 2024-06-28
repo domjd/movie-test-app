@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+# Movie Test App For useReducer/Context API/Custom Hooks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a small app I made to learn about useReducer and also practice working with the context API and custom hooks. I had used Redux before but not the built in useReducer so when I saw a video about a developer using it for a interview project I thought I would give it a try.
 
-Currently, two official plugins are available:
+This project is also the first time I have used a component library. I decided to use DaisyUI and I really enjoy using these libraries as you save a lot of time and can get something professional looking up and running very quickly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I decided to implement infinte scrolling as well using the react-interaction-observer package and I think it works quite well. It took me some time to get it to a point where I was happy with it but I think works very smoothly now.
 
-## Expanding the ESLint configuration
+Error Toasts are displayed with react-hot-toat if no data can be found and a error message displayed in place of the movies list.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Issues Encountered
 
-- Configure the top-level `parserOptions` property like this:
+One of the issues I had as a result of implementing infinite scrolling was due the my reducer action using the spread operator to append new data to the movies array. New movies needed to be appended to the array but because everything renders twice in Strict Mode that meant that instead of loading 20 movies into the array it loads 40. The way I have set everything up is I intially load the data in useEffect in my custom hook, the state page and genre are in the dependency array so when they change the function runs again. To solve this issue with as little code as possible I simply made a check in the reducer action to check if the page was the first page and if it was just set the array rather than spreading it to a new array.
+
+I am a bit embaraased to say I spent way longer on this issue than I care to admit, especially for something that only happens with Strict Mode on, however I was determined to come up with a solution and didn't want to resort to just disabling Stirct Mode. I learnt a lot in the process of solving this issue and making this basic app over all.
+
+Here is how I solved my issue:
 
 ```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+    case "SET_MOVIES":
+      return {
+        ...state,
+        movies:
+          state.page === 1
+            ? action.payload
+            : [...state.movies, ...action.payload],
+        isLoading: false,
+      };
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Technologies Used
+
+- React
+- Tailwind
+- DaisyUI
+- HeadlessUI
+- React-Hot-Toast
+- React-Interaction-Observer

@@ -3,6 +3,7 @@ export type TMovieState = {
   genre: string;
   page: number;
   isLoading: boolean;
+  isError: boolean;
 };
 
 export type TMovie = {

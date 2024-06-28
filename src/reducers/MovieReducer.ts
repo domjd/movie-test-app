@@ -5,11 +5,13 @@ export const intialState: TMovieState = {
   genre: "0",
   page: 1,
   isLoading: false,
+  isError: false,
 };
 
 export type Action =
   | { type: "SET_MOVIES"; payload: TMovie[] }
   | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_ERROR"; payload: boolean }
   | { type: "SET_GENRE"; payload: string }
   | { type: "SET_PAGE"; payload: number };
 
@@ -20,7 +22,10 @@ export const movieReducer = (state: TMovieState, action: Action) => {
     case "SET_MOVIES":
       return {
         ...state,
-        movies: [...state.movies, ...action.payload],
+        movies:
+          state.page === 1
+            ? action.payload
+            : [...state.movies, ...action.payload],
         isLoading: false,
       };
     case "SET_GENRE":
@@ -34,6 +39,8 @@ export const movieReducer = (state: TMovieState, action: Action) => {
       };
     case "SET_PAGE":
       return { ...state, isLoading: false, page: action.payload };
+    case "SET_ERROR":
+      return { ...state, isLoading: false, isError: action.payload };
     default:
       return state;
   }
